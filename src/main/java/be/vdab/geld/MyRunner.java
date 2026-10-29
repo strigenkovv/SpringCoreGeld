@@ -26,5 +26,9 @@ public class MyRunner implements CommandLineRunner {
         var mens = new Mens(0, naam, geld);
         var nieuweId = mensService.create(mens);
         System.out.println("Id van deze mens: " + nieuweId);
+
+        // Oude code uit 18.6:
+        // mensService.findAll()
+        //         .forEach(mens -> System.out.println(mens));
     }
 }
