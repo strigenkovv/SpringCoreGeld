@@ -113,4 +113,11 @@ public class MensRepository {
                 .query(Mens.class)
                 .list();
     }
+
+    public void verhoogGeldMet10Procent(String naam) {
+        var sql = "update mensen set geld = geld * 1.1 where naam = ?";
+        jdbcClient.sql(sql)
+                .param(naam)
+                .update();
+    }
 }

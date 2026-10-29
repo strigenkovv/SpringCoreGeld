@@ -27,4 +27,9 @@ public class MensService {
     public long create(Mens mens) {
         return mensRepository.create(mens);
     }
+
+    @Transactional
+    public void verhoogGeldMet10Procent(String naam) {
+        mensRepository.verhoogGeldMet10Procent(naam);
+    }
 }
