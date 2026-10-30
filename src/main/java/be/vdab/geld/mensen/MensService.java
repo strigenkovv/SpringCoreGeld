@@ -32,4 +32,17 @@ public class MensService {
     public void verhoogGeldMet10Procent(String naam) {
         mensRepository.verhoogGeldMet10Procent(naam);
     }
+
+    @Transactional
+    public void schenk(Schenking schenking) {
+        var vanMensId = schenking.getVanMensId();
+        var vanMens = mensRepository.findAndLockById(vanMensId)
+                .orElseThrow(() -> new MensNietGevondenException(vanMensId));
+        var aanMensId = schenking.getAanMensId();
+        var aanMens = mensRepository.findAndLockById(aanMensId)
+                .orElseThrow(() -> new MensNietGevondenException(aanMensId));
+        vanMens.schenk(aanMens, schenking.getBedrag());
+        mensRepository.update(vanMens);
+        mensRepository.update(aanMens);
+    }
 }
