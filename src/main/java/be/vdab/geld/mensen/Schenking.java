@@ -1,11 +1,14 @@
 package be.vdab.geld.mensen;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class Schenking {
+    private final long id = 0;
     private final long vanMensId;
     private final long aanMensId;
     private final BigDecimal bedrag;
+    private final LocalDateTime wanneer = LocalDateTime.now();
 
     public Schenking(long vanMensId, long aanMensId, BigDecimal bedrag) {
         if (vanMensId <= 0) {
@@ -29,11 +32,19 @@ public class Schenking {
         return vanMensId;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public long getAanMensId() {
         return aanMensId;
     }
 
     public BigDecimal getBedrag() {
         return bedrag;
+    }
+
+    public LocalDateTime getWanneer() {
+        return wanneer;
     }
 }
