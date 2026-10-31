@@ -309,6 +309,35 @@ MensService → MensRepository → JdbcClient → DataSource → Database
 
 В тестах сервиса можно проверить сразу несколько действий одной транзакции: изменение денег отправителя, изменение денег получателя и добавление записи о дарении.
 
+### Как соотносятся тесты в проекте
+
+```text
+DataSourceTest                 → проверка подключения к базе
+MensRepositoryTest             → SQL и MensRepository
+SchenkingRepositoryTest        → SQL и SchenkingRepository
+MensServiceTest                → MensService с mock-репозиториями
+MensServiceIntegrationTest     → MensService с настоящей базой
+MensTest                       → бизнес-правила Mens
+SchenkingTest                  → проверки Schenking
+```
+
+В другом проекте названия будут другими, но смысл тот же:
+
+```text
+FestivalRepositoryTest         → MensRepositoryTest
+BoekingServiceUnitTest         → MensServiceTest
+BoekingServiceIntegrationTest  → MensServiceIntegrationTest
+FestivalServiceTest            → тест другого сервиса
+```
+
+Главное различие:
+
+```text
+Unit-тест        → mock, без настоящей базы
+Integration-тест → Spring, настоящие repositories и база
+Domain-тест      → бизнес-правила domain class
+```
+
 ## Полезные нидерландские слова
 
 | Nederlands | Русский |
